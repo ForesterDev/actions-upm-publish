@@ -20,7 +20,7 @@ mv /tmp/package.json Assets/MadCrew.VR/package.json
 #    echo $(echo -n "${INPUT_NPM_REGISTRY_URL}" | sed 's/^https://')'/:_authToken="'${INPUT_NPM_AUTH_TOKEN}'"' >> ~/.npmrc
 #fi
 echo "//npm.pkg.github.com/:_authToken=${INPUT_NPM_AUTH_TOKEN}" > .npmrc
-echo "registry=https://npm.pkg.github.com/huluvu424242" >> .npmrc
+echo "registry=https://npm.pkg.github.com/madcrewteam" >> .npmrc
 echo "@madcrewteam:registry=https://npm.pkg.github.com" >> .npmrc
 echo "@madcrewteam:registry=https://npm.pkg.github.com" >> .npmrc
 
