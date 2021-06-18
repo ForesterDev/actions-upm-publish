@@ -10,7 +10,7 @@ ${INPUT_RELEASE_SUMMARY}
 
 $(echo "${INPUT_RELEASE_BODY}" | sed 's/^#/\#\#/')
 EOS
-cat Assets/MadCrew.VR/package.json | jq -Mr '. | .version = "'"1.0.1"'"' > /tmp/package.json
+cat Assets/MadCrew.VR/package.json | jq -Mr '. | .version = "'"${INPUT_RELEASE_VERSION##v}"'"' > /tmp/package.json
 mv /tmp/package.json Assets/MadCrew.VR/package.json
 
 #if [ -z "${INPUT_NPM_REGISTRY_URL}" ]; then
