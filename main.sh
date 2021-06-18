@@ -13,12 +13,17 @@ EOS
 cat Assets/MadCrew.VR/package.json | jq -Mr '. | .version = "'"1.0.1"'"' > /tmp/package.json
 mv /tmp/package.json Assets/MadCrew.VR/package.json
 
-if [ -z "${INPUT_NPM_REGISTRY_URL}" ]; then
-    INPUT_NPM_REGISTRY_URL=$(cat .npmrc | sed 's/^registry=//')
-    echo $(cat .npmrc | grep '^registry=' | sed 's/^registry=https://')'/:_authToken="'${INPUT_NPM_AUTH_TOKEN}'"' >> ~/.npmrc
-else
-    echo $(echo -n "${INPUT_NPM_REGISTRY_URL}" | sed 's/^https://')'/:_authToken="'${INPUT_NPM_AUTH_TOKEN}'"' >> ~/.npmrc
-fi
+#if [ -z "${INPUT_NPM_REGISTRY_URL}" ]; then
+#    INPUT_NPM_REGISTRY_URL=$(cat .npmrc | sed 's/^registry=//')
+#    echo $(cat .npmrc | grep '^registry=' | sed 's/^registry=https://')'/:_authToken="'${INPUT_NPM_AUTH_TOKEN}'"' >> ~/.npmrc
+#else
+#    echo $(echo -n "${INPUT_NPM_REGISTRY_URL}" | sed 's/^https://')'/:_authToken="'${INPUT_NPM_AUTH_TOKEN}'"' >> ~/.npmrc
+#fi
+echo "//npm.pkg.github.com/:_authToken=${INPUT_NPM_AUTH_TOKEN}" > .npmrc
+echo "registry=https://npm.pkg.github.com/huluvu424242" >> .npmrc
+echo "@madcrewteam:registry=https://npm.pkg.github.com" >> .npmrc
+echo "@madcrewteam:registry=https://npm.pkg.github.com" >> .npmrc
+
 npm publish --tag latest --registry ${INPUT_NPM_REGISTRY_URL} ${INPUT_PACKAGE_DIRECTORY_PATH}
 
 git config --global user.email "github-actions@example.com"
